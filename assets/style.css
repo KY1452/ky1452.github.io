@@ -1,7 +1,27 @@
+/* Ensure all images have the same dimensions */
 .instilogo {
-    height: 50px;
-    filter: grayscale(20%);
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    object-fit: contain; /* Ensures the image doesn't get distorted */
+    margin: 10px auto; /* Center alignment and spacing */
+    display: block;
 }
+
+/* Center the institution and year text */
+.institution, .years {
+    text-align: center;
+    font-size: 14px; /* Adjust font size as needed */
+    margin-top: 5px;
+}
+
+/* Ensure the layout maintains spacing and alignment */
+.row.text-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adjust spacing between items */
+}
+
 
 a:hover {
     /* font-weight: 400; */

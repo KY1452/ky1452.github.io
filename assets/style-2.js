@@ -112,3 +112,8 @@ $(".institution").css("color", insttitlecolor);
 $(".institution").css("font-size", insttitlesize);
 $(".years").css("color", instyearcolor);
 $(".years").css("font-size", instyearsize);
+
+$(".profilepic").css("width", "150px"); // Set the width
+$(".profilepic").css("height", "150px"); // Set the height
+$(".profilepic").css("object-fit", "cover"); // Ensures no distortion
+$(".profilepic").css("border-radius", "25%"); // Makes it circular (optional)
