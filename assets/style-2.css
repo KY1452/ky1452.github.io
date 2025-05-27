@@ -84,7 +84,30 @@ a:hover {
 
 }
 
-/* .thisauthor {
-          color: #111;
-          text-decoration: underline;
-    } */
+body {
+    background-color: #fefae0;
+    color: #333333;
+    font-family: 'Georgia', serif;
+}
+
+.about {
+    color: #333333;
+}
+
+a {
+    color: #bc6c25;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #dda15e;
+    text-decoration: underline;
+}
+
+.menulink {
+    color: #606c38;
+}
+
+.menulink:hover {
+    color: #bc6c25;
+}
