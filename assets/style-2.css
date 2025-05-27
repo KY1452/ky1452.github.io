@@ -111,3 +111,22 @@ a:hover {
 .menulink:hover {
     color: #bc6c25;
 }
+.audio-box {
+    background: linear-gradient(135deg, #fff5f5, #fffaf0);
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.audio-box:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.audio-box audio {
+    width: 100%;
+    outline: none;
+    border-radius: 8px;
+}
