@@ -4,6 +4,11 @@
     height: 300px;
     /* Larger height for BITS Pilani logo */
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.instilogo:hover {
+    transform: translateY(-5px) scale(1.02);
 }
 
 a:hover {
@@ -40,6 +45,28 @@ a:hover {
     border-left: 1px solid #ddd;
 }
 
+.menulink {
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.menulink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    background-color: #bc6c25;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.menulink:hover::after {
+    width: 100%;
+    left: 0;
+}
+
 .menulink:hover {
     color: #111;
 }
@@ -48,6 +75,12 @@ a:hover {
     width: 200px !important;
     height: 225px !important;
     border-radius: 20% !important;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.profilepic:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
 }
 
 
@@ -84,10 +117,34 @@ a:hover {
 
 }
 
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
 body {
-    background-color: #fefae0;
+    background-color: #ffffff;
     color: #333333;
     font-family: 'Georgia', serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .about {
@@ -97,11 +154,12 @@ body {
 a {
     color: #bc6c25;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 a:hover {
     color: #dda15e;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .menulink {
@@ -111,6 +169,18 @@ a:hover {
 .menulink:hover {
     color: #bc6c25;
 }
+
+/* Glassmorphism */
+.glass {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 20px;
+}
+
 .audio-box {
     background: linear-gradient(135deg, #fff5f5, #fffaf0);
     border: 1px solid #e0e0e0;
@@ -118,15 +188,176 @@ a:hover {
     padding: 15px 20px;
     margin-top: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease;
 }
 
 .audio-box:hover {
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
 }
 
 .audio-box audio {
     width: 100%;
     outline: none;
     border-radius: 8px;
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dark Mode Variables & Overrides */
+body.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .about {
+    color: #d0d0d0;
+}
+
+body.dark-mode a {
+    color: #e9c46a;
+}
+
+body.dark-mode a:hover {
+    color: #f4a261;
+}
+
+body.dark-mode .menulink {
+    color: #a3b18a;
+}
+
+body.dark-mode .menulink:hover {
+    color: #e9c46a;
+}
+
+body.dark-mode .glass {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .audio-box {
+    background: linear-gradient(135deg, #2a2a2a, #333);
+    border: 1px solid #444;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .audio-box p {
+    color: #a3b18a !important;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .theme-toggle {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+body.dark-mode .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Migrated from JS */
+.header {
+    color: #bc6c25;
+    font-size: 18pt;
+}
+
+.name {
+    color: #333;
+    font-size: 23pt;
+}
+
+.papertitle {
+    color: #bc6c25;
+    font-size: 12pt;
+    font-weight: 300;
+}
+
+.thisauthor {
+    color: #333;
+    font-weight: 300;
+}
+
+.institution {
+    color: #333;
+    font-size: 12px;
+}
+
+.years {
+    color: #bc6c25;
+    font-size: 11px;
+}
+
+/* Dark Mode Overrides for Migrated Classes */
+body.dark-mode .header,
+body.dark-mode .papertitle,
+body.dark-mode .years {
+    color: #e9c46a;
+}
+
+body.dark-mode .name,
+body.dark-mode .thisauthor,
+body.dark-mode .institution,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode strong {
+    color: #e0e0e0 !important;
+}
+
+/* Invert logos in dark mode to make them visible */
+body.dark-mode .instilogo,
+body.dark-mode .bits-logo {
+    filter: invert(1) grayscale(100%) brightness(200%);
+    transition: filter 0.3s ease;
 }
