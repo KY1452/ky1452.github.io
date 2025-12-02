@@ -57,47 +57,30 @@ const instyearcolor = accentcolor;
 const instyearsize = "11px";
 
 // Works for sans serif, change otherwise
-$("head").append("<link href='https://fonts.googleapis.com/css2?family=" + fontname + ":wght@" + fontweights.join(';') + "&display=swap' rel='stylesheet' type='text/css'>");
-$("body").css("font-family", fontname);
+// Ensure jQuery is loaded before using it
+if (typeof $ !== 'undefined') {
+    $("head").append("<link href='https://fonts.googleapis.com/css2?family=" + fontname + ":wght@" + fontweights.join(';') + "&display=swap' rel='stylesheet' type='text/css'>");
+    $("body").css("font-family", fontname);
 
-// $("body").css("color", basecolor);
-$("body").css("font-weight", bodyfontweight);
-$("body").css("font-size", bodyfontsize);
-// $("body").css("background-color", backgroundcolor);
+    // $("body").css("color", basecolor);
+    $("body").css("font-weight", bodyfontweight);
+    $("body").css("font-size", bodyfontsize);
+    // $("body").css("background-color", backgroundcolor);
 
-// $("a").css("color", acolor);
-$("a").css("text-decoration", adecoration);
+    // $("a").css("color", acolor);
+    $("a").css("text-decoration", adecoration);
 
-// $(".menulink").css("color", menucolor);
-$(".menulink").css("font-size", menufontsize);
-$(".menulink").css("text-decoration", menudecoration);
+    // $(".menulink").css("color", menucolor);
+    $(".menulink").css("font-size", menufontsize);
+    $(".menulink").css("text-decoration", menudecoration);
 
-// $(".header").css("color", headercolor);
-// $(".header").css("font-size", headerfontsize);
-// $(".header").css("text-decoration", headerdecoration);
-// $(".name").css("color", namecolor);
-// $(".name").css("font-size", namefontsize);
-
-// $(".papertitle").css("color", ptitlecolor);
-// $(".papertitle").css("font-size", ptitlefontsize);
-// $(".papertitle").css("font-weight", ptitleweight);
-// $(".papertitle").css("text-decoration", ptitledecoration);
-// $(".papertitle").css("font-style", ptitlestyle);
-
-// $(".thisauthor").css("color", selfcolor);
-// $(".thisauthor").css("font-weight", selfweight);
-// $(".thisauthor").css("text-decoration", selfdecoration);
-// $(".thisauthor").css("font-style", selfstyle);
-
-// $(".institution").css("color", insttitlecolor);
-// $(".institution").css("font-size", insttitlesize);
-// $(".years").css("color", instyearcolor);
-// $(".years").css("font-size", instyearsize);
-
-$(".profilepic").css("width", "150px"); // Set the width
-$(".profilepic").css("height", "150px"); // Set the height
-$(".profilepic").css("object-fit", "cover"); // Ensures no distortion
-$(".profilepic").css("border-radius", "25%"); // Makes it circular (optional)
+    $(".profilepic").css("width", "150px"); // Set the width
+    $(".profilepic").css("height", "150px"); // Set the height
+    $(".profilepic").css("object-fit", "cover"); // Ensures no distortion
+    $(".profilepic").css("border-radius", "25%"); // Makes it circular (optional)
+} else {
+    console.error("jQuery not loaded, skipping style initialization");
+}
 
 
 // --- New Frontend Features ---
@@ -123,30 +106,47 @@ document.addEventListener('DOMContentLoaded', function () {
     revealElements.forEach(el => observer.observe(el));
 
     // 2. Dark Mode Logic
+    // 2. Dark Mode Logic
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    const icon = themeToggle.querySelector('i');
 
-    // Check localStorage
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    }
+    if (themeToggle) {
+        const icon = themeToggle.querySelector('i');
 
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        } else {
-            localStorage.setItem('theme', 'light');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+        // Check localStorage safely
+        try {
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        } catch (e) {
+            console.warn("LocalStorage access denied or not available:", e);
         }
-    });
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+
+            // Update icon
+            if (isDark) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+
+            // Save preference safely
+            try {
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (e) {
+                console.warn("Could not save theme preference:", e);
+            }
+        });
+    } else {
+        console.error("Theme toggle button not found");
+    }
 });
 
 // 3. Parallax Background
